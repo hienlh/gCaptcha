@@ -33,10 +33,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   _openReCaptcha() async {
-    String tokenResult = await GCaptcha.reCaptcha(CAPTCHA_SITE_KEY);
+    String? tokenResult = await GCaptcha.reCaptcha(CAPTCHA_SITE_KEY);
     print('tokenResult: $tokenResult');
-    Fluttertoast.showToast(msg: tokenResult, timeInSecForIosWeb: 4);
-
-    // setState
+    if (tokenResult != null) {
+      Fluttertoast.showToast(msg: tokenResult, timeInSecForIosWeb: 4);
+    } else {
+      Fluttertoast.showToast(msg: 'Fail', timeInSecForIosWeb: 4);
+    }
   }
 }
